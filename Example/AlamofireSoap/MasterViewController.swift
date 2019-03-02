@@ -79,7 +79,7 @@ class MasterViewController: UITableViewController {
                     return Alamofire.request("https://httpbin.org/delete", method: .delete)
                 case "SOAPREQUEST":
                     detailViewController.segueIdentifier = "SOAPREQUEST"
-                    return Alamofire.soapRequest("http://www.webservicex.net/globalweather.asmx", soapmethod: "GetCitiesByCountry", soapparameters: ["CountryName":"India"], namespace: "http://www.webserviceX.NET")
+                    return AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempUri.org")
                     
                 case "DOWNLOAD":
                     detailViewController.segueIdentifier = "DOWNLOAD"
