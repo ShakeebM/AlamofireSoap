@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AlamofireSoap_Example' do
+  pod 'AlamofireSoap', :path => '../'
+
+  target 'AlamofireSoap_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
