@@ -71,6 +71,7 @@ class DetailViewController: UITableViewController {
         guard let request = request else {
             return
         }
+        
 
         refreshControl?.beginRefreshing()
 
@@ -85,6 +86,7 @@ class DetailViewController: UITableViewController {
                     self.headers["\(field)"] = "\(value)"
                 }
             }
+            
 
             if let segueIdentifier = self.segueIdentifier {
                 switch segueIdentifier {

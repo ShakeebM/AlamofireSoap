@@ -13,7 +13,7 @@ public func soapRequest
     (_ url: URLConvertible,
      soapmethod : String,
      soapparameters: Parameters? = nil,
-     namespace : String = "http://tempUri.org")
+     namespace : String = "http://tempuri.org")
     -> DataRequest
 {
     

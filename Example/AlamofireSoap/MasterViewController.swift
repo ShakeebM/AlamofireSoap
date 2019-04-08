@@ -85,7 +85,7 @@ class MasterViewController: UITableViewController, UISplitViewControllerDelegate
                     return Alamofire.request("https://httpbin.org/delete", method: .delete)
                 case "SOAPREQUEST":
                     detailViewController.segueIdentifier = "SOAPREQUEST"
-                    return AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempUri.org")
+                    return AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempuri.org")
                     
                 case "DOWNLOAD":
                     detailViewController.segueIdentifier = "DOWNLOAD"

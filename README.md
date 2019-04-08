@@ -10,6 +10,7 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+Xcode 9.0 or later with Swift 4.2
 
 ## Installation
 
@@ -19,6 +20,23 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'AlamofireSoap'
 ```
+## Usage
+
+### Making a Request
+
+```swift
+import AlamofireSoap
+
+AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempUri.org")
+```
+
+### Response Handling
+
+Handling the `Response` of a `Request` made in Alamofire involves chaining a response handler onto the `Request`.
+
+```swift
+AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempuri.org").responseString { response in
+print("Request: \(response.value))   // original url request
 
 ## Author
 
