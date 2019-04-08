@@ -26,7 +26,7 @@ import UIKit
 import AlamofireSoap
 import Alamofire
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, UISplitViewControllerDelegate {
 
     @IBOutlet weak var titleImageView: UIImageView!
 
@@ -40,18 +40,24 @@ class MasterViewController: UITableViewController {
 
         navigationItem.titleView = titleImageView
     }
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        return false
+    }
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if let split = splitViewController {
             let controllers = split.viewControllers
-
+            split.delegate = self
             if
                 let navigationController = controllers.last as? UINavigationController,
                 let topViewController = navigationController.topViewController as? DetailViewController
             {
                 detailViewController = topViewController
+                detailViewController?.request = AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempUri.org")
             }
         }
     }
