@@ -8,7 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AlamofireSoap'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
+  s.swift_version    = '4.2'
   s.summary          = 'Alamofire Extension for Soap Webservices'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +19,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-AlamofireSoap is an extension to Alamofire Library to use Enable webservices with Alamofire
+AlamofireSoap is an extension to Alamofire Library to use Soap webservices with Alamofire
                        DESC
 
   s.homepage         = 'https://github.com/ShakeebM/AlamofireSoap'
