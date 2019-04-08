@@ -27,7 +27,7 @@ pod 'AlamofireSoap'
 ```swift
 import AlamofireSoap
 
-AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempUri.org")
+AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempuri.org")
 ```
 
 ### Response Handling
@@ -37,7 +37,7 @@ Handling the `Response` of a `Request` made in Alamofire involves chaining a res
 ```swift
 AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempuri.org").responseString { response in
 print("Request: \(response.value))   // original url request
-
+```
 ## Author
 
 Shakeeb Mancheri, shakeeb818@gmail.com
