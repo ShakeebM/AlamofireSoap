@@ -38,5 +38,5 @@ AlamofireSoap is an extension to Alamofire Library to use Enable webservices wit
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+   s.dependency 'Alamofire', '~> 4.7.0'
 end
