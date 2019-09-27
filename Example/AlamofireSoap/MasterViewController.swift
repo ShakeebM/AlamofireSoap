@@ -28,39 +28,44 @@ import Alamofire
 
 class MasterViewController: UITableViewController, UISplitViewControllerDelegate {
 
-    @IBOutlet weak var titleImageView: UIImageView!
+      @IBOutlet var titleImageView: UIImageView!
 
-    var detailViewController: DetailViewController? = nil
-    var objects = NSMutableArray()
+      var detailViewController: DetailViewController?
+      var objects = NSMutableArray()
 
-    // MARK: - View Lifecycle
+      private var reachability: NetworkReachabilityManager!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+      // MARK: - View Lifecycle
+      override func awakeFromNib() {
+          super.awakeFromNib()
 
-        navigationItem.titleView = titleImageView
-    }
+          navigationItem.titleView = titleImageView
+          clearsSelectionOnViewWillAppear = true
+
+          monitorReachability()
+      }
+
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return false
     }
     
     
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            split.delegate = self
-            if
-                let navigationController = controllers.last as? UINavigationController,
-                let topViewController = navigationController.topViewController as? DetailViewController
-            {
-                detailViewController = topViewController
-                detailViewController?.request = AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempUri.org")
-            }
-        }
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        if let split = splitViewController {
+//            let controllers = split.viewControllers
+//            split.delegate = self
+//            if
+//                let navigationController = controllers.last as? UINavigationController,
+//                let topViewController = navigationController.topViewController as? DetailViewController
+//            {
+//                detailViewController = topViewController
+//                detailViewController?.request = AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempUri.org")
+//            }
+//        }
+//    }
 
     // MARK: - UIStoryboardSegue
 
@@ -73,19 +78,19 @@ class MasterViewController: UITableViewController, UISplitViewControllerDelegate
                 switch segue.identifier! {
                 case "GET":
                     detailViewController.segueIdentifier = "GET"
-                    return Alamofire.request("https://httpbin.org/get")
+                    return AF.request("https://httpbin.org/get")
                 case "POST":
                     detailViewController.segueIdentifier = "POST"
-                    return Alamofire.request("https://httpbin.org/post", method: .post)
+                    return AF.request("https://httpbin.org/post", method: .post)
                 case "PUT":
                     detailViewController.segueIdentifier = "PUT"
-                    return Alamofire.request("https://httpbin.org/put", method: .put)
+                    return AF.request("https://httpbin.org/put", method: .put)
                 case "DELETE":
                     detailViewController.segueIdentifier = "DELETE"
-                    return Alamofire.request("https://httpbin.org/delete", method: .delete)
+                    return AF.request("https://httpbin.org/delete", method: .delete)
                 case "SOAPREQUEST":
                     detailViewController.segueIdentifier = "SOAPREQUEST"
-                    return AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","IntB":"2"], namespace: "http://tempuri.org")
+                    return AlamofireSoap.soapRequest("http://www.dneonline.com/calculator.asmx", soapmethod: "Add", soapparameters: ["intA":"1","intB":"2"], namespace: "http://tempuri.org")
                     
                 case "DOWNLOAD":
                     detailViewController.segueIdentifier = "DOWNLOAD"
@@ -93,7 +98,7 @@ class MasterViewController: UITableViewController, UISplitViewControllerDelegate
                         for: .cachesDirectory,
                         in: .userDomainMask
                     )
-                    return Alamofire.download("https://httpbin.org/stream/1", to: destination)
+                    return AF.download("https://httpbin.org/stream/1", to: destination)
                 default:
                     return nil
                 }
@@ -102,6 +107,18 @@ class MasterViewController: UITableViewController, UISplitViewControllerDelegate
             if let request = requestForSegue(segue) {
                 detailViewController.request = request
             }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 3 && indexPath.row == 0 {
+            print("Reachability Status: \(reachability.status)")
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    private func monitorReachability() {
+        NetworkReachabilityManager.default?.startListening { status in
+            print("Reachability Status Changed: \(status)")
         }
     }
 }

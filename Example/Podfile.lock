@@ -1,0 +1,23 @@
+PODS:
+  - Alamofire (5.0.0-rc.2)
+  - AlamofireSoap (0.1.3):
+    - Alamofire (~> 5.0.0-rc.2)
+
+DEPENDENCIES:
+  - AlamofireSoap (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+
+EXTERNAL SOURCES:
+  AlamofireSoap:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
+  AlamofireSoap: 3ff94d1b9a9dccc6fde075c8f5ee1986b78a0c23
+
+PODFILE CHECKSUM: 48c51fedcfa651a0452f39a5b0ef7f3396d47642
+
+COCOAPODS: 1.8.0

@@ -25,7 +25,7 @@ public func soapRequest
         soapGenerator = SoapRequestManager(methodName: soapmethod, namespace: namespace)
     }
     soapGenerator.generateSoapRequestElements()
-    return SessionManager.default.request(url, method: .post, parameters: [:], encoding: soapGenerator.getBody(), headers: soapGenerator.getHeaders())
+    return Session.default.request(url, method: .post, parameters: [:], encoding: soapGenerator.getBody(), headers: soapGenerator.getHeaders())
 }
 
 extension String: ParameterEncoding {
@@ -42,18 +42,19 @@ class SoapRequestManager {
     private var namespace : String
     private var parameters : Parameters?
     private var soapBody : String = ""
-    private var soapHeader : [String:String]?
+    private var soapHeader : HTTPHeaders
     
     init(methodName : String,namespace: String,parameters: Parameters? = nil) {
         self.methodName = methodName
         self.namespace = namespace
         self.parameters = parameters
+        self.soapHeader = HTTPHeaders(["Content-Type" : "text/xml; charset=utf-8"])
     }
     public func getBody() -> String {
         return soapBody
     }
     
-    public func getHeaders()-> [String : String]? {
+    public func getHeaders()-> HTTPHeaders {
         return soapHeader
     }
     public func generateSoapRequestElements() {
@@ -69,11 +70,12 @@ class SoapRequestManager {
             soapString = self.getNoParammethod()
         }
         self.soapBody = soapString
-        self.soapHeader = ["SOAPAction" : "\(self.namespace)/\(self.methodName)", "Content-Type" : "text/xml; charset=utf-8", "Content-Length" : "\(soapString.count)"]
+        self.soapHeader["SOAPAction"] = "\(self.namespace)/\(self.methodName)"
+        self.soapHeader["Content-Length"] = "\(soapString.count)"
     }
     
     private func getStartStringWithMethod() -> String {
-        let startString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n<soap:Body>\n<\(methodName) xmlns=\"\(namespace)\">"
+        let startString = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n<soap:Body>\n<\(methodName) xmlns=\"\(namespace)/\">"
         return startString
     }
     private func endStringWithMethod() -> String{
