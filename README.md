@@ -10,7 +10,7 @@
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
-Xcode 9.0 or later with Swift 4.2
+Xcode 10.0 or later with Swift 5.0
 
 ## Installation
 
