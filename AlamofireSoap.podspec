@@ -6,7 +6,7 @@
 # To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
 #
 
-Pod::Spec.new do |s|
+Pod::Spec.new do |spec|
   spec.name  = 'AlamofireSoap'
   spec.version  = '0.1.3'
   spec.swift_versions  = ['5.0','5.1']
