@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |spec|
   spec.name             = 'AlamofireSoap'
-  spec.version          = '0.1.1'
-  spec.swift_version    = '4.2'
+  spec.version          = '0.1.3'
+  spec.swift_version    = '5.0'
   spec.summary          = 'Alamofire Extension for Soap Webservices'
 
 # This description is used to generate tags and improve search results.
@@ -29,7 +29,7 @@ AlamofireSoap is an extension to Alamofire Library to use Soap webservices with 
   spec.source           = { :git => 'https://github.com/ShakeebM/AlamofireSoap.git', :tag => spec.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  spec.ios.deployment_target = '8.0'
+  spec.ios.deployment_target = '10.0'
 
   spec.source_files = 'AlamofireSoap/Classes/**/*'
   
@@ -39,5 +39,5 @@ AlamofireSoap is an extension to Alamofire Library to use Soap webservices with 
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-   spec.dependency 'Alamofire', '~> 4.7.0'
+   spec.dependency 'Alamofire', '~> 5.0.0-rc.2'
 end
