@@ -6,11 +6,11 @@
 # To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
 #
 
-Pod::Spec.new do |spec|
-  spec.name             = 'AlamofireSoap'
-  spec.version          = '0.1.3'
-  spec.swift_version    = '5.0'
-  spec.summary          = 'Alamofire Extension for Soap Webservices'
+Pod::Spec.new do |s|
+  spec.name  = 'AlamofireSoap'
+  spec.version  = '0.1.3'
+  spec.swift_versions  = ['5.0','5.1']
+  spec.summary  = 'Alamofire Extension for Soap Webservices'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
